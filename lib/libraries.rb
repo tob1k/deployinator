@@ -14,6 +14,7 @@ require 'pony'
 require 'sinatra/base'
 require 'mustache/sinatra'
 require 'open4'
+require 'sinatra_auth_github'
 
 # Silence mustache warnings
 module Mustache::Sinatra::Helpers

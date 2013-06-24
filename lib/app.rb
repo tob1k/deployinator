@@ -1,6 +1,8 @@
 module Deployinator
   # = Sinatra application
   class App < Sinatra::Base
+    enable :sessions
+
     register Mustache::Sinatra
     helpers Deployinator::Helpers
 
@@ -10,18 +12,26 @@ module Deployinator
       :namespace => Deployinator
     }
 
-    set :public, "public/"
-    set :static, true
+    set :github_options, {
+      :scopes => "user",
+      :secret => "9760bda20486ec7530166e06ee9d96462e17257d",
+      :client_id => "5b8f81af6a7d7fd22db8"
+    }
+    register Sinatra::Auth::Github
+
+    set :public_folder, "public/"
+    #set :static, true
 
     before do
       init(env)
     end
 
     get '/' do
+      authenticate!
       if Deployinator.default_stack 
         @stack = Deployinator::default_stack
       else 
-        @stack = "demo"
+        @stack = "twbt"
       end
       mustache @stack
     end

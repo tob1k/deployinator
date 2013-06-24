@@ -12,6 +12,8 @@ gem "json", "~> 1.7.7"
 gem "tlsmail"
 gem "open4"
 gem "pony"
+gem "sinatra_auth_github"
+
 group :test do
 #  gem 'nokogiri', '~> 1.4.7' # for ruby 1.8.6
   gem "capybara", "~> 1.1.4"
